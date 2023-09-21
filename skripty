@@ -315,3 +315,14 @@ ___________________________________________________________________
 -- sloupec data[lokalita] není filtrován, alt
 -- tzv. cross-filtrován
    ALL(dim_lokality[Lokalita]))
+
+_______________________________________________________
+
+23 pocet destivych zimnich dnu = 
+-- pocet datumu v dane lokalite, roce, zemi
+-- kdy v mesicich 1,2,11,12 byly srazky >0
+CALCULATE(
+    COUNT(data[datum]),
+    data[Srazky] > 0,
+    
+    dim_datumy[mesic] IN {1,2,11,12})
