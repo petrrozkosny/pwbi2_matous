@@ -202,3 +202,18 @@ CALCULATE(
     COUNT(data[Datum]),
     data[Lokalita] = "RUZYNE",
     data[Teplota] > 30)
+
+________________________________________________________
+
+16 byl rok nejdestivejsi = 
+
+-- suma srazek v dane lokalite a roce
+VAR srazky_rok  = SUM(data[Srazky])
+-- nejvyssi rocni srazky v dane lokalite 
+VAR nejvyssi_rocni_srazky =
+    MAXX(
+        ALL(data[rok]),
+    CALCULATE(SUM(data[Srazky])))
+
+RETURN
+IF(srazky_rok = nejvyssi_rocni_srazky,"ANO","NE")
