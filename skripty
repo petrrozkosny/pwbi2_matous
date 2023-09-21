@@ -344,3 +344,23 @@ ISFILTERED(dim_lokality[Lokalita]),
 CONCATENATEX(dim_lokality,dim_lokality[Lokalita],", "),
 "Vývoj srážek ve všech lokalitách"
 )
+
+_____________________________________________________________
+
+26 pf nejvetsi srazky = 
+-- sumu srazek v danem roce, mesici, lokalite
+VAR suma_srazek = SUM(data[Srazky])
+-- nejvyssi sumu srazek v danem mesici, lokalite,
+-- napric roky
+VAR nejvyssi_srazky =
+-- tabulka s jednotlivymi roky a jejich srazkami
+-- z teto tabulky pak vybirame nejvyssi hodnotu
+MAXX(
+    ADDCOLUMNS(
+    ALL(dim_datumy[rok]),
+    "rocni srazky",
+    CALCULATE(sum(data[Srazky]))),
+[rocni srazky])
+RETURN
+IF(nejvyssi_srazky = suma_srazek,"CYAN")
+
