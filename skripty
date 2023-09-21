@@ -10,3 +10,31 @@ ADDCOLUMNS(
 ,"kvartal",QUARTER([datum])
 ,"mesic",MONTH([datum])
 ,"den",DAY([datum]))
+
+_______________________________________________________________________________________
+
+dim_datumy_svatky = 
+ADDCOLUMNS(
+ADDCOLUMNS(
+-- funkce SELECTCOLUMNS() vybira sloupce z tabulky vracene funkci CALENDARAUTO()
+-- a prejmenovava je na "datum"
+    SELECTCOLUMNS(
+        -- funkce vrati sloupec s nazvem [Date]
+        CALENDARAUTO()
+    ,"datum",[Date])
+,"rok",YEAR([datum])
+,"kvartal",QUARTER([datum])
+,"mesic",MONTH([datum])
+,"den",DAY([datum])),
+"je svatek",
+SWITCH(TRUE(),
+[den] = 1 && [mesic] = 1,TRUE(),
+[den] = 1 && [mesic] = 5,TRUE(),
+[datum] IN 
+-- datumy velikonoc
+{
+DATE(2023,04,10),
+DATE(2022,04,17),
+DATE(2019,04,21)
+},TRUE()
+))
