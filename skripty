@@ -113,3 +113,13 @@ CALCULATE(
     data[Teplota] > 30)
 
 RETURN _3
+
+__________________________________________________________________________________________
+
+04 suma srazek ytd ruzyne = 
+-- suma srazek v danem roce, za mesice mensi ci rovno aktualnimu
+-- mesici v lokalite ruzyne
+CALCULATE(
+    SUM(data[Srazky]),
+data[Lokalita] = "RUZYNE",
+data[mesic] <= SELECTEDVALUE(data[mesic]))
