@@ -176,3 +176,19 @@ CALCULATE(
     COUNT(data[Datum]),
     data[Srazky] = max_srazky)>0,1,0)
 
+______________________________________________________________________________________
+
+09 byla ruzyne nejteplejsi lokalita = 
+-- byla ruzyne v danem roce a mesici nejteplejsi lokalitou,
+-- tj lokalitou s max teplota
+
+-- maximalni teplota v danem roce, mesici
+VAR max_teplota = MAX(data[Teplota])
+
+-- maximalni teplota v danem roce, mesici v ruzyne
+
+VAR max_teplota_ruzyne = 
+CALCULATE(MAX(data[Teplota]),data[Lokalita] = "RUZYNE")
+
+return
+if(max_teplota = max_teplota_ruzyne,"ano","ne")
