@@ -94,6 +94,8 @@ CALCULATE(
     // FILTER(ALL(data[Lokalita]),data[Lokalita] = "RUZYNE"),
     data[Lokalita] = "RUZYNE",
     ALL(data[mesic]))
+
+RETURN _3
 ________________________________________________________________________________________
 
 03 srazky ruzyne bylo teplo = 
