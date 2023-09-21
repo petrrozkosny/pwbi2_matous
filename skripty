@@ -332,3 +332,15 @@ CALCULATE(
 CALCULATE(
     SUM(data[Srazky]),
     dim_datumy[rok] = SELECTEDVALUE(dim_datumy[rok]) - 1)
+________________________________________________________________
+
+25 nazev grafu = 
+SWITCH(TRUE(),
+HASONEFILTER(dim_lokality[Lokalita]),
+-- pokud si uzivatel vybral jedinou lokalitu
+"Vývoj srážek v lokalitě "&SELECTEDVALUE(dim_lokality[Lokalita]),
+ISFILTERED(dim_lokality[Lokalita]),
+"Vývoj srážek v lokalitách "&
+CONCATENATEX(dim_lokality,dim_lokality[Lokalita],", "),
+"Vývoj srážek ve všech lokalitách"
+)
