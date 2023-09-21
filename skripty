@@ -136,11 +136,12 @@ data[rok] = SELECTEDVALUE(data[rok]) - 1)
 ____________________________________________________________________________________
 
 06 pocet dnu neprselo ruzyne = 
-
+-- nechceme brat v potaz hodnoty null
  CALCULATE(
     COUNT(data[Datum]),
     data[Lokalita] = "RUZYNE",
    NOT ISBLANK(data[Srazky]),
-    data[Srazky] = 0)
+data[Srazky] = 0)
+
 
 
