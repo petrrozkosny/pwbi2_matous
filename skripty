@@ -283,3 +283,13 @@ CONCATENATEX(
     data[Teplota] = max_teplota),
 data[Datum],UNICHAR(10) ,
 BLANK()))
+
+_______________________________________________________________
+20 pocet destivych vikendovych dnu ruzyne = 
+
+-- v danem mesici a roce
+CALCULATE(
+    COUNT(data[Datum]),
+    data[Lokalita] = "RUZYNE",
+    data[Srazky] > 0,
+    WEEKDAY(data[Datum],2) > 5)
