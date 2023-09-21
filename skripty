@@ -143,5 +143,18 @@ ________________________________________________________________________________
    NOT ISBLANK(data[Srazky]),
 data[Srazky] = 0)
 
+_______________________________________________________________________________
 
+07 datum maximalni teploty = 
+-- Funkce CALCULATE() pocita minimalni hodnotu ze sloupce datum,
+-- tabulky filtrovane vizualem pres rok a mesic
+-- a dale filtrovane funkci MAX() na maximalni teplotu
+CALCULATE(
+    MIN(data[Datum]),
+    data[Teplota] =
+
+    -- max() pocita maximalni hodnotu ze sloupecku teplota
+    -- prebira filtry vizualu, tj. je to maximalni teplota
+    -- v danem mesici a roce
+    max(data[Teplota]))
 
