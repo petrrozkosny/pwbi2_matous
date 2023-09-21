@@ -204,7 +204,11 @@ CALCULATE(
     data[Teplota] > 30)
 
 ________________________________________________________
-
+15 mesic nejvyssich srazek = 
+CALCULATE(
+    MAX(data[mesic]),
+    data[Srazky] = MAX(data[Srazky]))
+____________________________________________________________
 16 byl rok nejdestivejsi = 
 
 -- suma srazek v dane lokalite a roce
