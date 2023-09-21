@@ -269,3 +269,17 @@ RETURN
 CONCATENATEX(
 FILTER(data,data[Teplota] = max_teplota),
 data[Lokalita],", ")
+
+______________________________________________________________________________________
+
+19 datumy max teplot = 
+
+VAR max_teplota = MAX(data[Teplota])
+
+RETURN
+IF(ISFILTERED(data[rok]),
+CONCATENATEX(
+    FILTER(data,
+    data[Teplota] = max_teplota),
+data[Datum],UNICHAR(10) ,
+BLANK()))
