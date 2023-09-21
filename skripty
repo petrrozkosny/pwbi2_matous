@@ -158,3 +158,21 @@ CALCULATE(
     -- v danem mesici a roce
     max(data[Teplota]))
 
+______________________________________________________________________________
+
+08 mesic nejvetsich srazek = 
+-- vyskytl se v danem mesici a roku nejdestivejsi den celeho roku?
+-- nejdestivejsi den = den s maximalnimi srazkami
+-- maximalni srazky v danem roce bez ohledu na mesic
+VAR max_srazky =
+CALCULATE(
+    MAX(data[Srazky]),
+    ALL(data[mesic]))
+-- pocet datumu v danem mesici a roce s max_srazky =
+return
+
+IF(
+CALCULATE(
+    COUNT(data[Datum]),
+    data[Srazky] = max_srazky)>0,1,0)
+
