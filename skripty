@@ -293,3 +293,14 @@ CALCULATE(
     data[Lokalita] = "RUZYNE",
     data[Srazky] > 0,
     WEEKDAY(data[Datum],2) > 5)
+
+_______________________________________________________21 podil srazek v roce = 
+
+-- podíl sumy srážek v dané lokalitě a roce
+-- na sumě srážek v dané lokalitě ve všech letech
+
+VAR suma_vsechny = CALCULATE(SUM(data[Srazky]),ALL(data[rok]))
+VAR suma_srazek  = SUM(data[Srazky])
+
+RETURN
+suma_srazek / suma_vsechny
