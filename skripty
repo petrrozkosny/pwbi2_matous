@@ -132,3 +132,15 @@ CALCULATE(
 data[Lokalita] = "RUZYNE",
 data[mesic] <= SELECTEDVALUE(data[mesic]),
 data[rok] = SELECTEDVALUE(data[rok]) - 1)
+
+____________________________________________________________________________________
+
+06 pocet dnu neprselo ruzyne = 
+
+ CALCULATE(
+    COUNT(data[Datum]),
+    data[Lokalita] = "RUZYNE",
+   NOT ISBLANK(data[Srazky]),
+    data[Srazky] = 0)
+
+
