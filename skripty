@@ -38,3 +38,24 @@ DATE(2022,04,17),
 DATE(2019,04,21)
 },TRUE()
 ))
+
+________________________________________________________________________________
+
+dim_datumy_hodiny = 
+ADDCOLUMNS(
+GENERATE(
+ADDCOLUMNS(
+-- funkce SELECTCOLUMNS() vybira sloupce z tabulky vracene funkci CALENDARAUTO()
+-- a prejmenovava je na "datum"
+    SELECTCOLUMNS(
+        -- funkce vrati sloupec s nazvem [Date]
+        CALENDARAUTO()
+    ,"datum",[Date])
+,"rok",YEAR([datum])
+,"kvartal",QUARTER([datum])
+,"mesic",MONTH([datum])
+,"den",DAY([datum])),
+SELECTCOLUMNS(
+GENERATESERIES(0,23,1),
+"hodina",[Value])),
+"datum a cas",[datum] +TIME([hodina],0,0))
