@@ -192,3 +192,13 @@ CALCULATE(MAX(data[Teplota]),data[Lokalita] = "RUZYNE")
 
 return
 if(max_teplota = max_teplota_ruzyne,"ano","ne")
+
+______________________________________________________________________________________
+
+10 pocet tropickych dnu ruzyne = 
+-- pocet datumu v danem roce, mesici, kdy v lokalite ruzyne
+-- teplota > 30
+CALCULATE(
+    COUNT(data[Datum]),
+    data[Lokalita] = "RUZYNE",
+    data[Teplota] > 30)
