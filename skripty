@@ -241,3 +241,21 @@ CALCULATE(
     && data[Datum] <= EOMONTH(max(data[Datum]),- 1)))
 
 return srazky_ruzyne - srazky_ruzyne_minuly_mesic
+
+___________________________________________________________________________________________
+
+17 srazky mezimesicne ruzyne = 
+-- v danem roce, mesici
+VAR srazky_ruzyne = 
+CALCULATE(
+    SUM(data[Srazky]),
+    data[Lokalita] = "RUZYNE")
+VAR srazky_ruzyne_minuly_mesic = 
+CALCULATE(
+    SUM(data[Srazky]),
+    data[Lokalita] = "RUZYNE",
+    FILTER(ALL(data[Datum],data[rok],data[mesic])
+    ,data[Datum] >= EOMONTH(max(data[Datum]),-2)+1
+    && data[Datum] <= EOMONTH(max(data[Datum]),- 1)))
+
+return srazky_ruzyne - srazky_ruzyne_minuly_mesic
