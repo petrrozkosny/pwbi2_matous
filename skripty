@@ -294,7 +294,8 @@ CALCULATE(
     data[Srazky] > 0,
     WEEKDAY(data[Datum],2) > 5)
 
-_______________________________________________________21 podil srazek v roce = 
+_______________________________________________________
+21 podil srazek v roce = 
 
 -- podíl sumy srážek v dané lokalitě a roce
 -- na sumě srážek v dané lokalitě ve všech letech
@@ -304,3 +305,13 @@ VAR suma_srazek  = SUM(data[Srazky])
 
 RETURN
 suma_srazek / suma_vsechny
+
+___________________________________________________________________
+
+22 suma srazek vsechny lokality = CALCULATE(
+    SUM(data[Srazky]),
+-- v ALL() musime pouzit sloupece z dim_lokality,
+-- protoze sloupecek teto tabulky je ve vizualu
+-- sloupec data[lokalita] není filtrován, alt
+-- tzv. cross-filtrován
+   ALL(dim_lokality[Lokalita]))
