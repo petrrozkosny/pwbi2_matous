@@ -259,3 +259,13 @@ CALCULATE(
     && data[Datum] <= EOMONTH(max(data[Datum]),- 1)))
 
 return srazky_ruzyne - srazky_ruzyne_minuly_mesic
+
+_________________________________________________________________________________________
+
+18 nejteplejsi lokality = 
+
+VAR max_teplota = MAX(data[Teplota])
+RETURN
+CONCATENATEX(
+FILTER(data,data[Teplota] = max_teplota),
+data[Lokalita],", ")
