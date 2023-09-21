@@ -363,4 +363,41 @@ MAXX(
 [rocni srazky])
 RETURN
 IF(nejvyssi_srazky = suma_srazek,"CYAN")
+_____________________________________________________
+
+27 pf top srazky = 
+
+VAR _tabulka = 
+ADDCOLUMNS(
+    ALL(dim_datumy[rok],dim_datumy[mesic]),
+"suma srazek",
+CALCULATE(SUM(data[Srazky])))
+
+VAR _tabulka_rank = 
+-- krok 3: Z tabulky vracene funkci FILTER() vybirame jediny sloupecek,
+-- a to sloupecek suma srazek, kde jsou pouze TOP hodnoty
+SELECTCOLUMNS(
+-- krok 2:
+-- tabulku vracenou funkci ADDCOLUMNS() filtrujeme za pomoci funkce
+-- FILTER() na hodnoty, kdy rank srazek je mensi ci rovno hodnote
+-- vybrane v prurezu
+FILTER(
+ADDCOLUMNS(
+    -- krok1: Pridavame novy sloupec do tabulky z promenne _tabulka
+    _tabulka,
+    -- krok1: Nazev noveho sloupce
+    "rank srazek",
+    --krok1: Hodnota v danem sloupci definovana funkci RANKX()
+    -- kdy rankujeme hodnoty ze sloupce suma srazek
+    RANKX(_tabulka,
+    [suma srazek],,DESC)),
+[rank srazek] <=top_srazky[Hodnota parametru top_srazky]),
+"suma srazek",[suma srazek])
+
+RETURN
+-- krok4: Pokud je suma srazek v danem roce, mesici, lokalite
+-- obsazena v seznamu TOP srazek, tak vracime GOLD
+IF(SUM(data[Srazky]) IN _tabulka_rank,"GOLD")
+
+
 
