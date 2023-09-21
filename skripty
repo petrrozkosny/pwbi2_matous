@@ -78,3 +78,36 @@ CALCULATE(SUM(data[Srazky]),data[Lokalita] = "RUZYNE")
 
 RETURN _3
 
+____________________________________________________________________________________
+
+02 rocni srazky ruzyne = 
+VAR _2 = 
+CALCULATE(
+    SUM(data[Srazky]),
+        FILTER(
+        ALL(data[Lokalita],data[mesic]),
+    data[Lokalita] = "RUZYNE"))
+
+VAR _3 = 
+CALCULATE(
+    SUM(data[Srazky]),
+    // FILTER(ALL(data[Lokalita]),data[Lokalita] = "RUZYNE"),
+    data[Lokalita] = "RUZYNE",
+    ALL(data[mesic]))
+________________________________________________________________________________________
+
+03 srazky ruzyne bylo teplo = 
+-- suma srazek v danem roce, mesici, lokalite RUZYNE, kdy teplota >30
+
+VAR _2 = 
+CALCULATE(SUM(data[Srazky]),
+FILTER(ALL(data[Lokalita],data[Teplota]),
+data[Lokalita] = "RUZYNE" && data[Teplota] >30))
+
+VAR _3 =
+CALCULATE(
+    SUM(data[Srazky]),
+    data[Lokalita] = "RUZYNE",
+    data[Teplota] > 30)
+
+RETURN _3
