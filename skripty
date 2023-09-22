@@ -399,5 +399,33 @@ RETURN
 -- obsazena v seznamu TOP srazek, tak vracime GOLD
 IF(SUM(data[Srazky]) IN _tabulka_rank,"GOLD")
 
+_____________________________________________________________
 
+28 srazky kumulativne = 
+CALCULATE(
+    SUM(data[Srazky]),
+    dim_datumy[mesic] <= SELECTEDVALUE(dim_datumy[mesic]))
 
+______________________________________________________________
+
+29 nazev grafu = 
+
+SWITCH(TRUE(),
+HASONEFILTER(dim_lokality[Lokalita]),
+"Kumulativni srazky v lokalite "&SELECTEDVALUE(dim_lokality[Lokalita]),
+ISFILTERED(dim_lokality[Lokalita]),
+"Kumulativni srazky v lokalitach "&CONCATENATEX(dim_lokality,dim_lokality[Lokalita], ", "),
+"Kumulativni srazky ve vsech lokalitach")
+
+___________________________________________________________________
+
+30 maximalni mesicni srazky = 
+
+VAR maximalni_mesicni_srazky = 
+
+MAXX(
+    ALL(dim_datumy[mesic]),
+CALCULATE(SUM(data[Srazky])))
+
+RETURN
+IF(maximalni_mesicni_srazky = SUM(data[Srazky]),"GOLD")
