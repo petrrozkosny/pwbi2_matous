@@ -448,3 +448,15 @@ RETURN
 IF(ISBLANK(teplota_posledni_datum),
 "nevyplněno",
 teplota_posledni_datum)&" | "& posledni_datum
+
+_____________________________________________________________________________
+
+33 teplota posledni datum = 
+
+VAR posledni_datum = MAX(data[Datum])
+VAR teplota_posledni_datum = CALCULATE(MAX(data[Teplota]),dim_datumy[datum] = posledni_datum)
+
+RETURN 
+IF(ISBLANK(teplota_posledni_datum),
+"nevyplněno",
+teplota_posledni_datum)&" | "& posledni_datum
