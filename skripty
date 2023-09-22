@@ -480,3 +480,33 @@ CALCULATE(SUM(data[Srazky]))),
 
 RETURN _s_addcolumns
 
+______________________________________________________________________________________
+
+36 min max mesicni srazky = 
+VAR _maximalni_srazky_lokalita = [35 maximalni mesicni srazky]
+VAR _tabulka = 
+ADDCOLUMNS(
+CALCULATETABLE(ALL(data[Lokalita],data[rok],data[mesic]),ALL(data)),
+"mesicni srazky",
+CALCULATE(SUM(data[Srazky]),all(dim_lokality[Lokalita])))
+VAR _tabulka_max_srazek = 
+FILTER(
+ADDCOLUMNS(
+    _tabulka,
+    "max mesicni srazky",
+    MAXX(
+        FILTER(_tabulka,
+        data[Lokalita] = EARLIER(data[Lokalita])),
+    [mesicni srazky])),
+[mesicni srazky] = [max mesicni srazky])
+
+VAR max_max_srazky = 
+MAXX(_tabulka_max_srazek,[mesicni srazky])
+
+VAR min_max_srazky = MINX(_tabulka_max_srazek,[mesicni srazky])
+
+return
+
+SWITCH(TRUE(),
+_maximalni_srazky_lokalita = max_max_srazky,"gold",
+_maximalni_srazky_lokalita = min_max_srazky,"cyan")
