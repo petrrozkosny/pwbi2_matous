@@ -460,3 +460,23 @@ RETURN
 IF(ISBLANK(teplota_posledni_datum),
 "nevyplněno",
 teplota_posledni_datum)&" | "& posledni_datum
+
+___________________________________________________________________________________
+
+35 maximalni mesicni srazky = 
+
+VAR _bez_addcolumns = 
+MAXX(
+    ALL(dim_datumy[rok],dim_datumy[mesic]),
+CALCULATE(SUM(data[Srazky])))
+
+VAR _s_addcolumns = 
+MAXX(
+ADDCOLUMNS(
+ALL(dim_datumy[rok],dim_datumy[mesic]),
+"mesicni srazky",
+CALCULATE(SUM(data[Srazky]))),
+[mesicni srazky])
+
+RETURN _s_addcolumns
+
