@@ -1,0 +1,30 @@
+28 kumulativni srazky:
+Kumulativní suma srážek v daném roce a lokalitě
+
+29 nazev grafu:
+ Pokud uživatel vybral jedinou hodnotu, vypsat:
+"Kumulativní srážky v lokalite" + vybraná lokalita
+Pokud uživatel vybral více hodnot, vypsat:
+"Kumulativní srážky v lokalitach" + zřetězit lokality
+Pokud uživatel nevybral žádnou lokalitu, tak vypsat:
+"Kumulativni srazky ve vsech lokalitach"
+
+30 maximalni mesicni srazky:
+Barvou "gold" podmíněně formátovat měsíc, ve kterém napadlo nejvíce měsíčních srážek v daném roce
+__________________________________________________________________________________________________
+
+31. Maximální teplota v dané lokalitě
+32. Datumy maximálních teplot v dané lokalitě
+33. Poslední známá teplota v dané lokalitě + Datum poslední známé teploty, tj. výsledek bude např.
+	37,6 | 12.1.2000
+
+
+34. Řádek s lokalitou, ve které byla naměřena nejvyšší teplota podbarvit barvou "gold"
+35. Maximální měsíční srázky (tj. kolik maximálně napršelo v jediném kalendářním měsíci) v dané lokalitě
+36. Barevně odlišit (vztaženo k bodu 35):
+	- nejvyšší hodnotu: GOLD
+	- nejmenší hodnotu: CYAN
+
+
+37. Měsíce a roky nejvyšších měsíčních srážek
+38. Měsíce a roky nejnižších měsíčnch srážek
